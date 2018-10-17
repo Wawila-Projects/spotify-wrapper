@@ -1,5 +1,4 @@
 import 'package:spotify_wrapper/src/Abstracts/SpotifyObject.dart';
-import 'package:spotify_wrapper/src/StaticClasses/EnumUtils.dart';
 import 'package:spotify_wrapper/src/models/ExternalUrl.dart';
 import 'package:spotify_wrapper/src/models/Followers.dart';
 import 'package:spotify_wrapper/src/models/SporifyImage.dart';
@@ -25,9 +24,9 @@ class ArtistSimplified extends SpotifyObject {
           this.name, this.uri): super(SpotifyType.Artist);
 
   factory ArtistSimplified.fromJSON(Map<String, dynamic> json) {
-    final urls = ExternalUrls.fromJSON(json["external_urls"]);
-    return ArtistSimplified(urls, json["href"], json["id"], 
-                  json['name'], json["uri"]);
+    final urls = ExternalUrls.fromJSON(json['external_urls']);
+    return ArtistSimplified(urls, json['href'], json['id'], 
+                  json['name'], json['uri']);
   }
 }
 
@@ -55,11 +54,11 @@ class Artist extends ArtistSimplified {
   factory Artist.fromJSON(Map<String, dynamic> json) {
     final artist = ArtistSimplified.fromJSON(json);
     final followers = Followers.fromJSON(json['followers']);
-    final popularity = json["popularity"];
-    final genres = List<String>.from(json["genres"]);
+    final popularity = json['popularity'];
+    final genres = List<String>.from(json['genres']);
     
     var images = List<SpotifyImage>();
-    for (var value in json["images"]) {
+    for (var value in json['images']) {
       images.add(SpotifyImage.fromJSON(value));
     }
 
