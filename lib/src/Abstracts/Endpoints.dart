@@ -22,8 +22,28 @@ abstract class Endpoints {
     throw HttpExeption(response.statusCode, message: data['error']['message']);
   }
   
+  Future<Map<String, dynamic>> httpPut(String url, {Map<String, String> headers, String body}) async {
+    var allheaders = Map<String, dynamic>.from({
+      'Content-Type': 'application/json',    
+      'Authorization': 'Bearer ${SpotifyWrapper().accessToken}'
+      });
+    if (headers != null) {
+      allheaders.addAll(headers);
+    }
+   
+    final response =  await http.put('$_basePath/$url', headers: allheaders, body: body);
+    final data = json.decode(response.body);
+    if (response.statusCode == 200) {
+      return data;
+    }
+    throw HttpExeption(response.statusCode, message: data['error']['message']);
+  }
+
   Future<Map<String, dynamic>> httpPost(String url, {Map<String, String> headers, String body}) async {
-    var allheaders = Map<String, dynamic>.from({'Authorization': 'Bearer ${SpotifyWrapper().accessToken}'});
+    var allheaders = Map<String, dynamic>.from({
+      'Content-Type': 'application/json',    
+      'Authorization': 'Bearer ${SpotifyWrapper().accessToken}'
+      });
     if (headers != null) {
       allheaders.addAll(headers);
     }
