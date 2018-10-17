@@ -1,5 +1,5 @@
 enum SpotifyType {
-  Error, None, Track, Album, Artist, AudioFeatures, Playlist, User
+  Error, None, Track, Album, Artist, AudioFeatures, Playlist, User, PlayHistory
 }
 
 enum AlbumType {
@@ -24,4 +24,16 @@ enum ExternalUrlType {
 
 enum RecommendationSeedType {
   Error, None, Artist, Track, Genre
+}
+
+enum DeviceType {
+  Error, None, Computer, Smartphone, Speaker
+}
+
+enum RepeateState {
+  Error, None, Off, Track, Context
+}
+
+enum CurrentlyPlayingType {
+  Error, None, Track, Episode, Ad, Unknonwn
 }
