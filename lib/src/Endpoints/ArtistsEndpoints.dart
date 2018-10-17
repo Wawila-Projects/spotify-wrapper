@@ -51,7 +51,7 @@ class ArtistsEndpoints extends Endpoints {
     final baseUrl = '$urlSegment/$id/top-tracks';
     final query = buildUrl(market: market);
     final response = await httpGet('$baseUrl$query');
-    final values = response['tracks'] as List<Map<String, dynamic>>;
+    final values = List<Map<String, dynamic>>.from(response['tracks']);
     var tracks = List<Track>();
     for (var value in values) {
       tracks.add(Track.fromJSON(value));
@@ -63,7 +63,7 @@ class ArtistsEndpoints extends Endpoints {
   ///Returns a maximum of `20` Artists.
   Future<List<Artist>> getRelatedArtists(String id) async {
     final response = await httpGet('$urlSegment/$id/related-artists');
-    final values = response['artists'] as List<Map<String, dynamic>>;
+    final values = List<Map<String, dynamic>>.from(response['artists']);
     var artists = List<Artist>();
     for (var value in values) {
       artists.add(Artist.fromJSON(value));
